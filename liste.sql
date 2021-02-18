@@ -1,0 +1,9 @@
+USE data_bd;
+
+CREATE TABLE IF NOT EXISTS liste (
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    produit VARCHAR(100) NOT NULL,
+    prix INT NOT NULL,
+    quantite INT NOT NULL,
+    PRIMARY KEY(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

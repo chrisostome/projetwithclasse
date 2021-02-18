@@ -1,0 +1,32 @@
+version: '3.7'
+services:
+   db:
+       image: mysql:5.7
+       container_name: mysql
+       restart: always
+       volumes:
+           - db-test:/var/lib/mysql
+           - ./liste.sql:/docker-entrypoint-initdb.d/liste.sql
+       environment:
+           MYSQL_ROOT_PASSWORD: test
+           MYSQL_DATABASE: data_bd
+           MYSQL_USER: toto
+           MYSQL_PASSWORD: toto_md
+   app:
+        image: myapp
+        container_name: myapp
+        restart: always
+        volumes:
+            - ./app:/var/www/html
+        ports:
+            - 8080:80
+        depends_on:
+            - db
+   phpmyadmin:
+       image: phpmyadmin/phpmyadmin
+       links: 
+            - "db"
+       ports:
+            - 8081:80
+volumes:
+      db-test:
